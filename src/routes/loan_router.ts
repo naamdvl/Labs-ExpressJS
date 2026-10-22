@@ -1,12 +1,13 @@
 import { Router } from "express"
 import { LoanController } from "../controllers/loan_controller";
 import { validateLoanPayload } from "../middlewares/validateLoan.middleware";
+import { validateLoanUsuarios } from "../middlewares/validateLoanUsuarios";
 
 const LoanRouter = Router();
 
 LoanRouter.get('/usuarios', LoanController.getLoansUsers);
 
-LoanRouter.post('/new-user', LoanController.addNewUser);
+LoanRouter.post('/new-user', validateLoanUsuarios, LoanController.addNewUser);
 
 LoanRouter.get('/usuarios/:id', LoanController.getUserById);
 
