@@ -2,6 +2,7 @@ import { Router } from "express"
 import { LoanController } from "../controllers/loan_controller";
 import { validateLoanPayload } from "../middlewares/validateLoan.middleware";
 import { validateLoanUsuarios } from "../middlewares/validateLoanUsuarios";
+import { validateLoanNewLabs } from "../middlewares/validateLoanNewLabs";
 
 const LoanRouter = Router();
 
@@ -17,7 +18,7 @@ LoanRouter.delete('/usuarios/:id', LoanController.deleteUser);
 
 LoanRouter.get('/labs-areas', LoanController.getListLabs);
 
-LoanRouter.post('/new-labs-areas', LoanController.postLabs);
+LoanRouter.post('/new-labs-areas', validateLoanNewLabs, LoanController.postLabs);
 
 LoanRouter.patch('/update-labs-areas/:id', LoanController.updateLabs);
 
